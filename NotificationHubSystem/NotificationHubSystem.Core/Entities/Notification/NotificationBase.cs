@@ -4,7 +4,8 @@
     {
         public int ReceiverId { get; set; }
         public int TypeId { get; set; }
-        public int StatusId { get; set; }  
+        public int StatusId { get; set; }
+        public string Body { get; set; }
         public string Exception { get; set; } 
         public virtual Mail Mail { get; set; }
         public virtual SMS SMS { get; set; }

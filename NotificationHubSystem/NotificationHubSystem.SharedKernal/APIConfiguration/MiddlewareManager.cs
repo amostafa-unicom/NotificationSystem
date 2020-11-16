@@ -43,10 +43,10 @@ namespace NotificationHubSystem.SharedKernal.AppConfiguration
             {
                 services.AddControllers().AddFluentValidation().AddControllersAsServices();
             }
-            else
-            {
-                services.AddControllers().AddControllersAsServices();
-            }
+            //else
+            //{
+            //    services.AddControllersWithViews().AddControllersAsServices();
+            //}
 
             AppSettings appSettings = new AppSettings();
             configuration.Bind("AppSettings", appSettings);

@@ -30,6 +30,7 @@ namespace NotificationHubSystem.Presentation.API
             #region App Register
             services.AddAPIConfig(Configuration, useCORS: true, useSwagger: true, useFluentValidation: true);
             #endregion
+            services.AddControllersWithViews().AddControllersAsServices().AddNewtonsoftJson();
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {

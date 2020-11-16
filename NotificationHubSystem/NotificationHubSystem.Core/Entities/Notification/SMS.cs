@@ -3,8 +3,7 @@
     public class SMS
     {
         public int Id { get; set; }
-        public int NotificationId { get; set; }
-        public string Body { get; set; }
+        public int NotificationId { get; set; } 
         public virtual NotificationBase NotificationBase { get; set; }
     }
 }

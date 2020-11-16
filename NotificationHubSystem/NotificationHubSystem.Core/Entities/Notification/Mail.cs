@@ -4,7 +4,6 @@
     {
         public int Id { get; set; }
         public int NotificationId { get; set; }
-        public string Body { get; set; }
         public byte Priority { get; set; }
         public bool IsHtml { get; set; }
         public string To { get; set; }
