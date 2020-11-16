@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>dotnet-Unicom.Notification.Presentation.MailSender-4E4D6120-B949-40E0-A3D4-01A2769F2FB0</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NotificationHubSystem.Infrastructure\NotificationHubSystem.Infrastructure.csproj" />
+    <ProjectReference Include="..\NotificationHubSystem.SharedKernal\NotificationHubSystem.SharedKernal.csproj" />
+  </ItemGroup>
+</Project>

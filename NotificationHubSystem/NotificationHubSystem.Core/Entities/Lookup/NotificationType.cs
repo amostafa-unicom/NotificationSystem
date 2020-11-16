@@ -1,0 +1,10 @@
+﻿using System.Collections.Generic;
+
+namespace NotificationHubSystem.Core.Entities
+{
+    public class NotificationType : BaseEntity<int>
+    {
+        public string Name { get; set; }
+        public ICollection<NotificationBase> NotificationBase { get; set; }
+    }
+}

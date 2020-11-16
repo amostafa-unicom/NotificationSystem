@@ -1,0 +1,10 @@
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\bin\Debug\netcoreapp3.1\ResourceFiles\Messages_ar.json
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\bin\Debug\netcoreapp3.1\ResourceFiles\Messages_en.json
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\bin\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.deps.json
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\bin\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.dll
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\bin\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.pdb
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\obj\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.AssemblyInfoInputs.cache
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\obj\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.AssemblyInfo.cs
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\obj\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.dll
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\obj\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.pdb
+D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.SharedKernal\obj\Debug\netcoreapp3.1\NotificationHubSystem.SharedKernal.csprojAssemblyReference.cache
