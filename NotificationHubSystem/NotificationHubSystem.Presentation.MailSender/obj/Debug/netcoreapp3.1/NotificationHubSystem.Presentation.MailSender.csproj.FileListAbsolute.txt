@@ -1,3 +1,0 @@
-D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.Presentation.MailSender\obj\Debug\netcoreapp3.1\NotificationHubSystem.Presentation.MailSender.csprojAssemblyReference.cache
-D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.Presentation.MailSender\obj\Debug\netcoreapp3.1\NotificationHubSystem.Presentation.MailSender.AssemblyInfoInputs.cache
-D:\Projects\NotificationHubSystem\NotificationHubSystem\NotificationHubSystem.Presentation.MailSender\obj\Debug\netcoreapp3.1\NotificationHubSystem.Presentation.MailSender.AssemblyInfo.cs
