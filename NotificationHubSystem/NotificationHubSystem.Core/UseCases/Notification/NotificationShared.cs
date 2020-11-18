@@ -13,4 +13,13 @@ namespace NotificationHubSystem.Core.UseCases.Notification
         public int ReceiverId { get; set; }
         public string Body { get; set; }
     }
+    public class PushNotification
+    {
+        public int NotificationId { get; set; }
+        public int ReceiverId { get; set; }
+        public string Body { get; set; }
+        public string Title { get; set; }
+        public string SendData { get; set; }
+        public string NotificationTokenId { get; set; }
+    }
 }

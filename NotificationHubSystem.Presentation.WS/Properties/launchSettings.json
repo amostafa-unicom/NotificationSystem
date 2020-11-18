@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "NotificationHubSystem.Presentation.WS": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
