@@ -1,6 +1,6 @@
-﻿using CorePush.Google;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NotificationHubSystem.Core.Base;
+using NotificationHubSystem.Core.Entities;
 using NotificationHubSystem.Core.Interfaces.Repository.Custom;
 using NotificationHubSystem.SharedKernal;
 using NotificationHubSystem.SharedKernal.Settings;
@@ -22,36 +22,38 @@ namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationU
         {
             pushNotificationSettings = _pushNotificationSettings;
         }
-        public async Task<bool> HandleUseCase(List<PushNotification> _request, IOutputPort<ResultDto<bool>> _response)
+        public async Task<bool> HandleUseCase(List<NotificationBase> _request, IOutputPort<ResultDto<bool>> _response)
         {
             if (_request?.Any() ?? default)
             {
+
                 for (int i = 0; i < _request.Count; i++)
                 {
                     FirebaseNotificationDTO firebaseDto = new FirebaseNotificationDTO()
                     {
-                        Data = _request[i].SendData !=default? JsonConvert.DeserializeObject<object>(_request[i].SendData):default,
-                        RegistrationIds = new List<string> { _request[i].NotificationTokenId },
+                        Data = _request[i].PushNotification.SendData != default ? JsonConvert.DeserializeObject<object>(_request[i].PushNotification.SendData) : default,
+                        RegistrationIds = new List<string> { _request[i].PushNotification.NotificationTokenId },
                         Notification = new Notification()
                         {
                             Body = _request[i].Body,
-                            Title = _request[i].Title,
+                            Title = _request[i].PushNotification.Title,
                             Sound = string.Empty
                         },
                     };
 
-                    HTTPResponseJsonDTO<string> result = await FirebaseRequest<string, FirebaseNotificationDTO>(firebaseDto);
+                    HTTPResponse result = await FirebaseRequest<FirebaseNotificationDTO>(firebaseDto);
 
                     #region Update Notification Status
-                    Entities.NotificationBase NotificationBase = NotificationBaseRepository.GetWhere(x => x.Id == _request[i].NotificationId).FirstOrDefault();
-                    NotificationBase.StatusId = (byte)result.Status;
-                    NotificationBase.Exception = result.Body.ToString();
+
+                    _request[i].StatusId = (byte)result.Status;
+                    _request[i].Exception = result.Body.ToString();
                     #endregion
                 }
                 await UnitOfWork.Commit();
 
                 _response.HandlePresenter(new ResultDto<bool>(true));
-            }else
+            }
+            else
                 _response.HandlePresenter(new ResultDto<bool>(default));
             return true;
         }
@@ -65,10 +67,10 @@ namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationU
         /// <typeparam name="K">content type</typeparam>
         /// <param name="content">posted object.</param>
         /// <returns>HTTPResponseJsonDTO<T></returns>
-        public async Task<HTTPResponseJsonDTO<T>> FirebaseRequest<T, K>(K content)
+        public async Task<HTTPResponse> FirebaseRequest<K>(K content)
         {
             #region Declare return type with initial value
-            HTTPResponseJsonDTO<T> response = new HTTPResponseJsonDTO<T>();
+            HTTPResponse response = new HTTPResponse();
             #endregion
             try
             {
@@ -93,11 +95,11 @@ namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationU
                     {
                         using Stream dataStreamResponse = tResponse.GetResponseStream();
                         using StreamReader tReader = new StreamReader(dataStreamResponse);
-                        response = new HTTPResponseJsonDTO<T>()
+                        response = new HTTPResponse()
                         {
                             HttpStatusCode = tResponse.StatusCode,
                             Status = SharedKernal.Enum.CommonEnum.SendingStatus.Success,
-                            Body = JsonConvert.DeserializeObject<T>(tReader.ReadToEnd())
+                            Body = tReader.ReadToEnd()
                         };
                     }
                 }
@@ -113,18 +115,18 @@ namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationU
                     string responseContent = new StreamReader(respStream).ReadToEnd();
                     if (!string.IsNullOrWhiteSpace(responseContent))
                     {
-                        response = new HTTPResponseJsonDTO<T>()
+                        response = new HTTPResponse()
                         {
                             HttpStatusCode = resp.StatusCode,
                             Status = SharedKernal.Enum.CommonEnum.SendingStatus.Failed,
-                            Body = JsonConvert.DeserializeObject<T>(responseContent)
+                            Body = responseContent
                         };
                     }
                 }
             }
             catch (Exception exception)
             {
-                response = new HTTPResponseJsonDTO<T>()
+                response = new HTTPResponse()
                 {
                     HttpStatusCode = HttpStatusCode.BadRequest,
                     Status = SharedKernal.Enum.CommonEnum.SendingStatus.Failed,
@@ -132,16 +134,5 @@ namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationU
             }
             return response;
         }
-    }
-
-    internal class HTTPResponseJsonDTO<T>
-    {
-        public HTTPResponseJsonDTO()
-        {
-        }
-
-        public HttpStatusCode HttpStatusCode { get; set; }
-        public SharedKernal.Enum.CommonEnum.SendingStatus Status { get; set; }
-        public T Body { get; set; }
     }
 }

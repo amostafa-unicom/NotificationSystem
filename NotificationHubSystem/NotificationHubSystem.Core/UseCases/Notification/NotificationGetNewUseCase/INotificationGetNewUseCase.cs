@@ -1,8 +1,10 @@
-﻿using NotificationHubSystem.SharedKernal;
+﻿using NotificationHubSystem.Core.Entities;
+using NotificationHubSystem.SharedKernal;
+using System.Collections.Generic;
 
 namespace NotificationHubSystem.Core.UseCases.Notification.NotificationGetNewUseCase
 {
-    public interface INotificationGetNewUseCase : IUseCaseResponseHandler<NotificationGetNewOutputDto>
+    public interface INotificationGetNewUseCase : IUseCaseResponseListHandler<NotificationBase>
     {
     }
 }

@@ -1,9 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NotificationHubSystem.Core.Entities;
 using NotificationHubSystem.Core.UseCases.Notification.NotificationGetNewUseCase;
 using NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationUseCase;
 using NotificationHubSystem.SharedKernal;
@@ -60,7 +63,7 @@ namespace NotificationHubSystem.Presentation.WS
             {
                 await logger.WriteLogAsync(CommonEnum.LogLevelEnum.Information, MethodBase.GetCurrentMethod(), $"Worker running at: [{DateTimeOffset.Now}]");
                 INotificationGetNewUseCase notificationGetNewUseCase = scope.ServiceProvider.GetRequiredService<INotificationGetNewUseCase>();
-                OutputPort<ResultDto<NotificationGetNewOutputDto>> result = new OutputPort<ResultDto<NotificationGetNewOutputDto>>();
+                OutputPort<ListResultDto<NotificationBase>> result = new OutputPort<ListResultDto<NotificationBase>>();
                 await notificationGetNewUseCase.HandleUseCase(result);
                 if (result.Result.Data != default)
                     await HandleNotification(result.Result.Data,scope);
@@ -76,11 +79,11 @@ namespace NotificationHubSystem.Presentation.WS
         /// Handle notification
         /// </summary>
         /// <returns></returns>
-        private async Task<bool> HandleNotification(NotificationGetNewOutputDto Notification, IServiceScope scope)
+        private async Task<bool> HandleNotification(List<NotificationBase> Notification, IServiceScope scope)
         {
             ISendPushNotificationUseCase sendPushNotificationUseCase = scope.ServiceProvider.GetRequiredService<ISendPushNotificationUseCase>();
             OutputPort<ResultDto<bool>> result = new OutputPort<ResultDto<bool>>();
-            await sendPushNotificationUseCase.HandleUseCase(Notification.PushNotification, result);
+            await sendPushNotificationUseCase.HandleUseCase(Notification.Where(x=>x.TypeId== (byte)CommonEnum.NotificationType.PushNotification).ToList(), result);
 
             return true;
         }
