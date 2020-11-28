@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using NotificationHubSystem.Core.UseCases.Notification.PushNotificationAddUseCase;
+using NotificationHubSystem.Core.UseCases.Notification.PushNotificationGetAllUseCase;
 using NotificationHubSystem.SharedKernal;
 using NotificationHubSystem.SharedKernal.AppConfiguration.Base;
 using NotificationHubSystem.SharedKernal.Helper.HttpInOutHandler;
@@ -15,8 +16,9 @@ namespace NotificationHubSystem.Presentation.API.Controllers
     {
         #region Properties
         public IPushNotificationAddUseCase PushNotificationAddUseCase { get; set; }
+        public IPushNotificationGetAllUseCase PushNotificationGetAllUseCase { get; set; }
         #endregion
-       
+
         #region Actions
         [HttpPost]
         public async Task<ActionResult<ResultDto<bool>>> AddPushNotification([FromBody]List<PushNotificationAddInputDto> request)
@@ -26,7 +28,16 @@ namespace NotificationHubSystem.Presentation.API.Controllers
 
             return presenter.Result;
         }
-    
+
+        [HttpPost]
+        public async Task<ActionResult<ListResultDto<PushNotificationGetAllOutPutDto>>> GetAllushNotification([FromBody]PushNotificationGetAllInputDto request)
+        {
+            OutputPort<ListResultDto<PushNotificationGetAllOutPutDto>> presenter = new OutputPort<ListResultDto<PushNotificationGetAllOutPutDto>>();
+            await PushNotificationGetAllUseCase.HandleUseCase(request, presenter);
+
+            return presenter.Result;
+        }
+
         #endregion
     }
 }
