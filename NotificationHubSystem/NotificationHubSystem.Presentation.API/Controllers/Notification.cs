@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NotificationHubSystem.Core.UseCases.Notification.PushNotificationAddUseCase;
-using NotificationHubSystem.Core.UseCases.Notification.PushNotificationGetAllUseCase;
+using NotificationHubSystem.Core.Interfaces.Repository.Custom;
+using NotificationHubSystem.Core.UseCases.Notification.PushNotification.PushNotificationAddUseCase;
+using NotificationHubSystem.Core.UseCases.Notification.PushNotification.PushNotificationGetAllUseCase;
+using NotificationHubSystem.Core.UseCases.Notification.RealTime.RealTimeAddUseCase;
 using NotificationHubSystem.SharedKernal;
 using NotificationHubSystem.SharedKernal.AppConfiguration.Base;
 using NotificationHubSystem.SharedKernal.Helper.HttpInOutHandler;
@@ -17,6 +19,7 @@ namespace NotificationHubSystem.Presentation.API.Controllers
         #region Properties
         public IPushNotificationAddUseCase PushNotificationAddUseCase { get; set; }
         public IPushNotificationGetAllUseCase PushNotificationGetAllUseCase { get; set; }
+        public IRealTimeAddUseCase RealTimeAddUseCase { get; set; }
         #endregion
 
         #region Actions
@@ -25,6 +28,15 @@ namespace NotificationHubSystem.Presentation.API.Controllers
         {
             OutputPort<ResultDto<bool>> presenter = new OutputPort<ResultDto<bool>>();
              await PushNotificationAddUseCase.HandleUseCase(request, presenter);
+
+            return presenter.Result;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ResultDto<bool>>> AddRealTimeNotification([FromBody]RealTimeAddInputDto request)
+        {
+            OutputPort<ResultDto<bool>> presenter = new OutputPort<ResultDto<bool>>();
+            await RealTimeAddUseCase.HandleUseCase(request, presenter);
 
             return presenter.Result;
         }

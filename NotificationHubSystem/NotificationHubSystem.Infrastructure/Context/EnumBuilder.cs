@@ -17,6 +17,7 @@ namespace NotificationHubSystem.Infrastructure.Context
             modelBuilder.Entity<NotificationType>().HasData(CreateNotificatioType(CommonEnum.NotificationType.Mail));
             modelBuilder.Entity<NotificationType>().HasData(CreateNotificatioType(CommonEnum.NotificationType.PushNotification));
             modelBuilder.Entity<NotificationType>().HasData(CreateNotificatioType(CommonEnum.NotificationType.SMS));
+            modelBuilder.Entity<NotificationType>().HasData(CreateNotificatioType(CommonEnum.NotificationType.RealTime));
         }
         #endregion
 

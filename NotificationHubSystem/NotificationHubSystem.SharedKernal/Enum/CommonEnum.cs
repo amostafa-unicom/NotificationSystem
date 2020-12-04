@@ -113,7 +113,8 @@ namespace NotificationHubSystem.SharedKernal.Enum
         {
             Mail = 1,
             PushNotification = 2,
-            SMS = 3
+            SMS = 3,
+            RealTime=4
         }
     }
 }

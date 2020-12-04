@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationUseCase
+namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.SendPushNotificationUseCase
 {
     public class FirebaseNotificationDTO
     {

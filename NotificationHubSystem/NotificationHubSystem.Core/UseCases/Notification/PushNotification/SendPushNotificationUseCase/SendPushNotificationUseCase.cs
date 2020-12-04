@@ -12,13 +12,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationUseCase
+namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.SendPushNotificationUseCase
 {
     internal class SendPushNotificationUseCase : BaseUseCase, ISendPushNotificationUseCase
     {
         public INotificationBaseRepository NotificationBaseRepository { get; set; }
-        private readonly PushNotificationSettings pushNotificationSettings;
-        public SendPushNotificationUseCase(PushNotificationSettings _pushNotificationSettings)
+        private readonly FireBaseSettings pushNotificationSettings;
+        public SendPushNotificationUseCase(FireBaseSettings _pushNotificationSettings)
         {
             pushNotificationSettings = _pushNotificationSettings;
         }

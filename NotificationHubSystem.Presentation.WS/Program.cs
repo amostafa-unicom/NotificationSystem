@@ -39,7 +39,7 @@ namespace NotificationHubSystem.Presentation.WS
                             configuration.Bind("SeriLog", seriLogSettings);
                             services.AddSingleton(seriLogSettings);
 
-                            PushNotificationSettings pushNotificationSettings = new PushNotificationSettings();
+                            FireBaseSettings pushNotificationSettings = new FireBaseSettings();
                             configuration.Bind("PushNotificationSettings", pushNotificationSettings);
                             services.AddSingleton(pushNotificationSettings);
 

@@ -1,4 +1,4 @@
-﻿namespace NotificationHubSystem.Core.UseCases.Notification.PushNotificationGetAllUseCase
+﻿namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.PushNotificationGetAllUseCase
 {
     public class PushNotificationGetAllOutPutDto
     {

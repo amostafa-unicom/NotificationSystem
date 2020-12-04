@@ -12,6 +12,7 @@
         public virtual SendingStatus SendingStatus { get; set; }
         public virtual PushNotification PushNotification { get; set; }
         public virtual NotificationType NotificationType { get; set; } 
+        public virtual RealTime RealTime { get; set; } 
 
     }
 }

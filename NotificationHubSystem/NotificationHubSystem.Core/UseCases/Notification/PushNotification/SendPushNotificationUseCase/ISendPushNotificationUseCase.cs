@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationUseCase
+namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.SendPushNotificationUseCase
 {
     public interface ISendPushNotificationUseCase : IUseCaseRequestResponseHandler<List<NotificationBase>, bool>
     {

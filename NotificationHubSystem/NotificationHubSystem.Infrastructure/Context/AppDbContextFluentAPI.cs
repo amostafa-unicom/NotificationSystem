@@ -24,6 +24,7 @@ namespace NotificationHubSystem.Infrastructure.Context
                 entity.HasOne(e => e.NotificationType).WithMany(e => e.NotificationBase).HasForeignKey(e => e.TypeId);
                 entity.HasOne(e => e.Mail).WithOne(e => e.NotificationBase).HasForeignKey<Mail>(e => e.NotificationId);
                 entity.HasOne(e => e.SMS).WithOne(e => e.NotificationBase).HasForeignKey<SMS>(e => e.NotificationId);
+                entity.HasOne(e => e.RealTime).WithOne(e => e.NotificationBase).HasForeignKey<RealTime>(e => e.NotificationId);
                 entity.HasOne(e => e.PushNotification).WithOne(e => e.NotificationBase).HasForeignKey<PushNotification>(e => e.NotificationId);
             });
 

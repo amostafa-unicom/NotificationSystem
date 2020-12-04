@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static NotificationHubSystem.SharedKernal.Enum.CommonEnum;
 
-namespace NotificationHubSystem.Core.UseCases.Notification.PushNotificationAddUseCase
+namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.PushNotificationAddUseCase
 {
     internal class PushNotificationAddUseCase : BaseUseCase, IPushNotificationAddUseCase
     {

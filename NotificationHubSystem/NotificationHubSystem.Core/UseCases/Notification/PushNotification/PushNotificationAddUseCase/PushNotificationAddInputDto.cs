@@ -1,4 +1,4 @@
-﻿namespace NotificationHubSystem.Core.UseCases.Notification.PushNotificationAddUseCase
+﻿namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.PushNotificationAddUseCase
 {
     public class PushNotificationAddInputDto: BaseNotification
     {

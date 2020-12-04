@@ -8,7 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NotificationHubSystem.Core.Entities;
 using NotificationHubSystem.Core.UseCases.Notification.NotificationGetNewUseCase;
-using NotificationHubSystem.Core.UseCases.Notification.SendPushNotificationUseCase;
+using NotificationHubSystem.Core.UseCases.Notification.PushNotification.SendPushNotificationUseCase;
+using NotificationHubSystem.Core.UseCases.Notification.RealTime.RealTimeSendUseCase;
 using NotificationHubSystem.SharedKernal;
 using NotificationHubSystem.SharedKernal.Enum;
 using NotificationHubSystem.SharedKernal.Settings;
@@ -66,7 +67,7 @@ namespace NotificationHubSystem.Presentation.WS
                 OutputPort<ListResultDto<NotificationBase>> result = new OutputPort<ListResultDto<NotificationBase>>();
                 await notificationGetNewUseCase.HandleUseCase(result);
                 if (result.Result.Data != default)
-                    await HandleNotification(result.Result.Data,scope);
+                    await HandleNotification(result.Result.Data, scope);
 
             }
             catch (Exception exception)
@@ -81,9 +82,22 @@ namespace NotificationHubSystem.Presentation.WS
         /// <returns></returns>
         private async Task<bool> HandleNotification(List<NotificationBase> Notification, IServiceScope scope)
         {
-            ISendPushNotificationUseCase sendPushNotificationUseCase = scope.ServiceProvider.GetRequiredService<ISendPushNotificationUseCase>();
             OutputPort<ResultDto<bool>> result = new OutputPort<ResultDto<bool>>();
-            await sendPushNotificationUseCase.HandleUseCase(Notification.Where(x=>x.TypeId== (byte)CommonEnum.NotificationType.PushNotification).ToList(), result);
+
+            #region Push Notification
+            ISendPushNotificationUseCase sendPushNotificationUseCase = scope.ServiceProvider.GetRequiredService<ISendPushNotificationUseCase>();
+            List<NotificationBase> PushNotification = Notification.Where(x => x.TypeId == (byte)CommonEnum.NotificationType.PushNotification).ToList();
+            if (PushNotification?.Any() ?? default)
+                await sendPushNotificationUseCase.HandleUseCase(PushNotification, result);
+            #endregion
+
+            #region RealTime
+            IRealTimeSendUseCase sendRealTimeNotificationUseCase = scope.ServiceProvider.GetRequiredService<IRealTimeSendUseCase>();
+            List<NotificationBase> RealTimeNotification = Notification.Where(x => x.TypeId == (byte)CommonEnum.NotificationType.RealTime).ToList();
+            if (RealTimeNotification?.Any() ?? default)
+                await sendRealTimeNotificationUseCase.HandleUseCase(RealTimeNotification, result);
+            #endregion
+
 
             return true;
         }

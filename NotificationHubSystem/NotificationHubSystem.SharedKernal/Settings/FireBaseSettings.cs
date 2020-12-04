@@ -4,10 +4,11 @@ using System.Text;
 
 namespace NotificationHubSystem.SharedKernal.Settings
 {
-   public class PushNotificationSettings
+   public class FireBaseSettings
     {
         public int RequestTimeout { get; set; }
         public string FirebaseUrl { get; set; }
+        public string DbURL { get; set; }
         public string AuthKey { get; set; }
         public string SenderId { get; set; }
         public bool EnableSound { get; set; }

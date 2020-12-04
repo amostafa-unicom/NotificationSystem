@@ -14,7 +14,7 @@ namespace NotificationHubSystem.Core.UseCases.Notification.NotificationGetNewUse
         public async Task<bool> HandleUseCase(IOutputPort<ListResultDto<NotificationBase>> _response)
         {
             List<NotificationBase> notifications = await NotificationBaseRepository.GetAll(x => x.DeleteStatus == (byte)DeleteStatus.NotDeleted && x.StatusId == (byte)SharedKernal.Enum.CommonEnum.SendingStatus.New
-            , $"{nameof(Mail)},{nameof(SMS)},{nameof(PushNotification)}");
+            , $"{nameof(Mail)},{nameof(SMS)},{nameof(PushNotification)},{nameof(RealTime)}");
 
             //if (notifications?.Any() ?? default)
             //{

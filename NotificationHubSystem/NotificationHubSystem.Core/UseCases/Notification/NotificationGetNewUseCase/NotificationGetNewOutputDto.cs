@@ -5,7 +5,7 @@ namespace NotificationHubSystem.Core.UseCases.Notification.NotificationGetNewUse
     public class NotificationGetNewOutputDto
     {
 
-        public List<PushNotification> PushNotification { get; set; }
+        public List<Entities.PushNotification> PushNotification { get; set; }
     }
 
 }

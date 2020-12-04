@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using static NotificationHubSystem.SharedKernal.Enum.CommonEnum;
 
-namespace NotificationHubSystem.Core.UseCases.Notification.PushNotificationGetAllUseCase
+namespace NotificationHubSystem.Core.UseCases.Notification.PushNotification.PushNotificationGetAllUseCase
 {
     internal class PushNotificationGetAllUseCase : BaseUseCase, IPushNotificationGetAllUseCase
     {
