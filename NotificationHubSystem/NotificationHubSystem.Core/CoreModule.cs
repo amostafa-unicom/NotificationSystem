@@ -28,8 +28,8 @@ namespace NotificationHubSystem.Core
         #region Private - Methods
         private void ResolveUseCases(ContainerBuilder builder)
         {
-            Type[] useCase = System.Reflection.Assembly.Load(typeof(UseCases.Notification.MailAddUseCase.MailAddUseCase).Assembly.GetName()).GetTypes().Where(x => x.IsSubclassOf(typeof(Base.BaseUseCase))).ToArray();
-            Type[] iUseCase = System.Reflection.Assembly.Load(typeof(UseCases.Notification.MailAddUseCase.IMailAddUseCase).Assembly.GetName()).GetTypes().Where(a => a.IsInterface).ToArray();
+            Type[] useCase = System.Reflection.Assembly.Load(typeof(UseCases.MailAddUseCase.MailAddUseCase).Assembly.GetName()).GetTypes().Where(x => x.IsSubclassOf(typeof(Base.BaseUseCase))).ToArray();
+            Type[] iUseCase = System.Reflection.Assembly.Load(typeof(UseCases.MailAddUseCase.IMailAddUseCase).Assembly.GetName()).GetTypes().Where(a => a.IsInterface).ToArray();
             Resolve(builder, useCase, iUseCase);
         }
         private void Resolve(ContainerBuilder builder, Type[] useCase, Type[] iUseCase)

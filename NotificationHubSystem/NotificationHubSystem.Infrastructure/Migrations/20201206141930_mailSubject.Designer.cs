@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NotificationHubSystem.Infrastructure.Context;
 
 namespace NotificationHubSystem.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201206141930_mailSubject")]
+    partial class mailSubject
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,28 +115,28 @@ namespace NotificationHubSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 932, DateTimeKind.Local).AddTicks(1702),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 803, DateTimeKind.Local).AddTicks(3496),
                             DeleteStatus = 0,
                             Name = "Mail"
                         },
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 932, DateTimeKind.Local).AddTicks(2427),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 803, DateTimeKind.Local).AddTicks(4288),
                             DeleteStatus = 0,
                             Name = "PushNotification"
                         },
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 932, DateTimeKind.Local).AddTicks(2589),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 803, DateTimeKind.Local).AddTicks(4450),
                             DeleteStatus = 0,
                             Name = "SMS"
                         },
                         new
                         {
                             Id = 4,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 932, DateTimeKind.Local).AddTicks(2701),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 803, DateTimeKind.Local).AddTicks(4810),
                             DeleteStatus = 0,
                             Name = "RealTime"
                         });
@@ -198,9 +200,6 @@ namespace NotificationHubSystem.Infrastructure.Migrations
                     b.Property<int>("NotificationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Recipient")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NotificationId")
@@ -233,21 +232,21 @@ namespace NotificationHubSystem.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 927, DateTimeKind.Local).AddTicks(1503),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 799, DateTimeKind.Local).AddTicks(231),
                             DeleteStatus = 0,
                             Name = "New"
                         },
                         new
                         {
                             Id = 2,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 931, DateTimeKind.Local).AddTicks(5989),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 802, DateTimeKind.Local).AddTicks(6929),
                             DeleteStatus = 0,
                             Name = "Success"
                         },
                         new
                         {
                             Id = 3,
-                            CreationDate = new DateTime(2020, 12, 6, 21, 31, 43, 931, DateTimeKind.Local).AddTicks(6493),
+                            CreationDate = new DateTime(2020, 12, 6, 16, 19, 29, 802, DateTimeKind.Local).AddTicks(7531),
                             DeleteStatus = 0,
                             Name = "Failed"
                         });

@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NotificationHubSystem.Core.Entities;
-using NotificationHubSystem.Core.UseCases.Notification.NotificationGetNewUseCase;
-using NotificationHubSystem.Core.UseCases.Notification.PushNotification.SendPushNotificationUseCase;
-using NotificationHubSystem.Core.UseCases.Notification.RealTime.RealTimeSendUseCase;
+using NotificationHubSystem.Core.UseCases.Mail.MailSendUseCase;
+using NotificationHubSystem.Core.UseCases.NotificationGetNewUseCase;
+using NotificationHubSystem.Core.UseCases.PushNotification.SendPushNotificationUseCase;
+using NotificationHubSystem.Core.UseCases.RealTime.RealTimeSendUseCase;
+using NotificationHubSystem.Core.UseCases.SMS.SMSSendUseCase;
 using NotificationHubSystem.SharedKernal;
 using NotificationHubSystem.SharedKernal.Enum;
 using NotificationHubSystem.SharedKernal.Settings;
@@ -98,6 +100,19 @@ namespace NotificationHubSystem.Presentation.WS
                 await sendRealTimeNotificationUseCase.HandleUseCase(RealTimeNotification, result);
             #endregion
 
+            #region Mail
+            IMailSendUseCase MailSendUseCase = scope.ServiceProvider.GetRequiredService<IMailSendUseCase>();
+            List<NotificationBase> MailNotification = Notification.Where(x => x.TypeId == (byte)CommonEnum.NotificationType.Mail).ToList();
+            if (MailNotification?.Any() ?? default)
+                await MailSendUseCase.HandleUseCase(MailNotification, result);
+            #endregion
+
+            #region SMS
+            ISMSSendUseCase SMSSendUseCase = scope.ServiceProvider.GetRequiredService<ISMSSendUseCase>();
+            List<NotificationBase> SMSNotification = Notification.Where(x => x.TypeId == (byte)CommonEnum.NotificationType.SMS).ToList();
+            if (SMSNotification?.Any() ?? default)
+                await SMSSendUseCase    .HandleUseCase(SMSNotification, result);
+            #endregion
 
             return true;
         }

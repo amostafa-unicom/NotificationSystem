@@ -47,13 +47,13 @@ namespace NotificationHubSystem.Presentation.WS
                             configuration.Bind("WorkerSettings", workerSettings);
                             services.AddSingleton(workerSettings);
 
-                            //SMTPServerSettings smtpServerSettings = new SMTPServerSettings();
-                            //configuration.Bind("SMTPServerSettings", smtpServerSettings);
-                            //services.AddSingleton(smtpServerSettings);
+                            SMTPServerSettings smtpServerSettings = new SMTPServerSettings();
+                            configuration.Bind("SMTPServerSettings", smtpServerSettings);
+                            services.AddSingleton(smtpServerSettings);
 
-                            //MailAppSettings mailAppSettings = new MailAppSettings();
-                            //configuration.Bind("MailAppSettings", mailAppSettings);
-                            //services.AddSingleton(mailAppSettings);
+                            SMSSettings sMSSettings = new SMSSettings();
+                            configuration.Bind("SMSConfiguration", sMSSettings);
+                            services.AddSingleton(sMSSettings);
 
                             services.AddDbContext<AppDbContext>(cnf => cnf.UseSqlServer(configuration.GetConnectionString("DBConString")));
                         })
