@@ -31,7 +31,7 @@ namespace NotificationHubSystem.Core.UseCases.PushNotification.SendPushNotificat
                 {
                     FirebaseNotificationDTO firebaseDto = new FirebaseNotificationDTO()
                     {
-                        Data = _request[i].PushNotification.SendData != default ? JsonConvert.DeserializeObject<object>(_request[i].PushNotification.SendData) : default,
+                        //Data = _request[i].PushNotification.SendData != default ? JsonConvert.DeserializeObject<object>(_request[i].PushNotification.SendData) : default,
                         RegistrationIds = new List<string> { _request[i].PushNotification.NotificationTokenId },
                         Notification = new Notification()
                         {

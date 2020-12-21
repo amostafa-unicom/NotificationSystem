@@ -20,12 +20,13 @@ namespace NotificationHubSystem.Core.UseCases.RealTime.RealTimeSendUseCase
         }
         public async Task<bool> HandleUseCase(List<NotificationBase> _request, IOutputPort<ResultDto<bool>> _response)
         {
-            FirebaseDB firebaseDB = new FirebaseDB(fireBaseSettings.DbURL);
+            FirebaseDB firebaseDB = default;
+            List<string> Nodes = default;
 
             _request.ForEach(notification =>
             {
-                List<string> Nodes = notification.RealTime.Event.Split('/').ToList();
-
+                Nodes=notification.RealTime.Event.Split('/').ToList();
+                firebaseDB= new FirebaseDB(fireBaseSettings.DbURL);
                 firebaseDB = firebaseDB.Node(Nodes[0]);
                 Nodes.RemoveAt(0);
                 Nodes.ForEach(node => { firebaseDB = firebaseDB.NodePath(node); });
